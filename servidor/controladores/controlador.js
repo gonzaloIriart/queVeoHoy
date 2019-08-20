@@ -4,16 +4,28 @@ function peliculas(req, res){
   
     connection.query("SELECT * FROM pelicula", function (err, result, fields) {
       if (err) throw err;
-      console.log(JSON.stringify(result[0]));
       var respuesta = {
         peliculas: result
       }
-      res.send(JSON.stringify(result));
+      res.send(JSON.stringify(respuesta));
       
     });
   }
 
+function generos(req,res){
+  connection.query("SELECT * FROM genero", function (err, result, fields) {
+    if (err) throw err;
+    console.log(JSON.stringify(result));
+    var respuesta = {
+      generos: result
+    }
+    res.send(JSON.stringify(respuesta));
+    
+  });
+}
+
 
 module.exports= {
-  peliculas: peliculas
+  peliculas: peliculas,
+  generos: generos
 };

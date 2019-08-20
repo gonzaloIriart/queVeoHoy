@@ -1,4 +1,4 @@
-var mysql      = require('mysql');
+var mysql = require('mysql');
 
 var connection = mysql.createConnection({
   host     : '127.0.0.1',
@@ -7,6 +7,5 @@ var connection = mysql.createConnection({
   password : 'root',
   database : 'peliculasdb'
 });
-
 module.exports = connection;
 

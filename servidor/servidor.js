@@ -17,7 +17,7 @@ app.get('/peliculas', controlador.peliculas);
 
 app.get('/peliculas/:id' , controlador.pelicula);
 
-app.get('/peliculas/recomendacion', controlador.recomendacion);
+app.get('/recomendacion', controlador.recomendacion);
 
 app.get('/generos', controlador.generos);
 

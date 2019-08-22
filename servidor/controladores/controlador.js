@@ -66,8 +66,27 @@ function generos(req,res){
 }
 
 function recomendacion(req,res){
+  query= `SELECT * FROM pelicula INNER JOIN genero ON genero.id = pelicula.genero_id WHERE `
   let {genero,anio_inicio,anio_fin,puntuacion} = req.query;
-  console.log(genero,anio_inicio,anio_fin,puntuacion)
+  if(anio_fin == undefined && anio_inicio == undefined && puntuacion == undefined){
+    query= `SELECT * FROM pelicula INNER JOIN genero ON genero.id = pelicula.genero_id WHERE nombre LIKE "${genero}" `
+  }else{
+    if(anio_fin !== undefined && anio_inicio !== undefined){
+      query = query + ` anio BETWEEN ${anio_inicio} AND ${anio_fin} `;
+    }
+    if(puntuacion !== undefined){
+      query = query + ` puntuacion >= ${puntuacion} `;
+    }
+    query = query + `AND nombre LIKE "${genero}" `;
+  }
+  connection.query(query, function (err, result, fields) {
+    if (err) throw err;
+    var respuesta = {
+      peliculas: result
+    }
+    res.send(JSON.stringify(respuesta));
+    
+  });
 }
 
 module.exports= {

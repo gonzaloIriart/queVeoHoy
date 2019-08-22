@@ -7,7 +7,7 @@ function pelicula(req, res){
   INNER JOIN actor_pelicula ap ON ap.pelicula_id = p.id
   INNER JOIN genero g on g.id = p.genero_id
   INNER JOIN actor a on a.id = ap.actor_id
-  WHERE p.id = ${id}`
+  WHERE p.id = ${id}`;
  
   connection.query(query, function (err, result, fields) {
     if (err) throw err;
@@ -17,28 +17,40 @@ function pelicula(req, res){
     console.log(respuesta)    
     res.send(JSON.stringify(respuesta));
     });
-  }
-
-  
+  }  
 
 function peliculas(req, res){
-    let query= `SELECT * FROM pelicula `;
-    if(req.query.genero !== undefined){
-      query = query + `WHERE genero_id = ${req.query.genero} `; 
-    }if(req.query.titulo !== undefined){
-      query = query + `AND titulo LIKE "%${req.query.titulo}%" `;
-    }if(req.query.anio !== undefined){
-      query = query + `AND anio = ${req.query.anio} `;
-    }if(req.query.order !== undefined){
-      query = query +`ORDER BY ${req.query.order} `;
+    //El array check almacenara las querys que no esten undefined
+    let check = [];
+    let {genero,anio,titulo,columna_orden} = req.query;
+    let query = ``;
+    //Si no tenemos parametros, el query no tendrá where
+    if(genero == undefined && anio == undefined && titulo == undefined){
+      query = `SELECT * FROM pelicula`;
+    }else{     
+      //Si tenemos parametros el query seguira con un where y por cada parametro adicional definido agregamos un and. 
+      query= `SELECT * FROM pelicula WHERE `;
+      if(genero !== undefined){
+        check.push(` genero_id = ${genero} `);
+      }if(titulo !== undefined){
+        check.push(` titulo REGEXP "${titulo}" `);
+      }if(anio !== undefined){
+       check.push(`anio = ${anio}`);
+      }
+      for(let i =0 ; i<check.length;i++){
+        query = query + check[i];
+        if(i+1 < check.length){
+          query = query + ` AND `;
+        }
+      }
     }
-    connection.query(query, function (err, result, fields) {
+    query = query + ` ORDER BY ${columna_orden}`;
+    connection.query(query,check , function (err, result, fields) {
       if (err) throw err;
       var respuesta = {
         peliculas: result
       }
       res.send(JSON.stringify(respuesta));
-      
     });
   }
 
@@ -53,9 +65,14 @@ function generos(req,res){
   });
 }
 
+function recomendacion(req,res){
+  let {genero,anio_inicio,anio_fin,puntuacion} = req.query;
+  console.log(genero,anio_inicio,anio_fin,puntuacion)
+}
 
 module.exports= {
   peliculas: peliculas,
   generos: generos,
-  pelicula: pelicula
+  pelicula: pelicula,
+  recomendacion:recomendacion
 };

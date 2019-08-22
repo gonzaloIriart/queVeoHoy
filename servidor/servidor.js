@@ -17,6 +17,8 @@ app.get('/peliculas', controlador.peliculas);
 
 app.get('/peliculas/:id' , controlador.pelicula);
 
+app.get('/peliculas/recomendacion', controlador.recomendacion);
+
 app.get('/generos', controlador.generos);
 
 //seteamos el puerto en el cual va a escuchar los pedidos la aplicación

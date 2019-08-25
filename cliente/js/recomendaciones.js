@@ -113,10 +113,10 @@ function ControladorRecomendaciones() {
 
         if (Object.keys(query_params).length !== 0) {
             var query = $.param(query_params);
-            var ruta = "/recomendacion?"
+            var ruta = "/peliculas/recomendacion?"
             console.log(ruta,query)
         } else {
-            var ruta = "/recomendacion";
+            var ruta = "/peliculas/recomendacion";
             var query = "";
             console.log(ruta + query)
         }

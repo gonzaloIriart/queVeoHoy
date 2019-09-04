@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+app.get('/', function(req, res){
+  res.sendFile( __dirname + "/cliente/html" + "index.html" );
+});
+
 app.get('/peliculas', controlador.peliculas);
 
 app.get('/peliculas/recomendacion', controlador.recomendacion);

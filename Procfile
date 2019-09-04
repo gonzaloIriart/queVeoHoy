@@ -1,2 +1,2 @@
-web: servidor/servidor.js
+web: servidor.js
 

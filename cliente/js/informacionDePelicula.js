@@ -1,5 +1,5 @@
 (function() {
-    var server = 'http://localhost:8080';
+    var server = 'https://guarded-wave-42203.herokuapp.com';
     var params = location.search
     //se obtiene el id de la película de la cuál tenemos que obtener la información
     var id = (params.split("="))[1];

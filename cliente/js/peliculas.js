@@ -1,5 +1,5 @@
 //ip y puerto al que se le realizaran los pedidos
-var servidor = 'http://localhost:8080';
+var servidor = 'https://guarded-wave-42203.herokuapp.com';
 $(document).ready(function() {
     //se hace el pedido al backend de todos los generos para cargalos en el listado de géneros
     $.getJSON(servidor + "/generos",

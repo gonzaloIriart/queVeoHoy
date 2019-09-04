@@ -1,4 +1,4 @@
-var servidor = 'http://localhost:8080';
+var servidor = 'https://guarded-wave-42203.herokuapp.com';
 $(document).ready(function() {
     var controladorRecomendaciones = new ControladorRecomendaciones();
     //cuando el documento esta listo se inicializan las preguntas y se le da funcionalidad a los botones

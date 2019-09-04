@@ -12,10 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-
-app.get('/', function(req, res){
-  res.sendFile( __dirname + "/cliente/html" + "index.html" );
-});
+app.use(express.static('cliente'));
 
 app.get('/peliculas', controlador.peliculas);
 

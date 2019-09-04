@@ -22,7 +22,7 @@ app.get('/peliculas/:id' , controlador.pelicula);
 app.get('/generos', controlador.generos);
 
 //seteamos el puerto en el cual va a escuchar los pedidos la aplicación
-var puerto = '8080';
+var puerto = '80';
 
 app.listen(puerto, function () {
   console.log( "Escuchando en el puerto " + puerto );

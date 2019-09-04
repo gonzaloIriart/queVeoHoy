@@ -44,7 +44,10 @@ function peliculas(req, res){
         }
       }
     }
-    query = query + ` ORDER BY ${columna_orden}`;
+    if(columna_orden !== undefined){
+      query = query + ` ORDER BY ${columna_orden}`;
+    }
+    
     connection.query(query,check , function (err, result, fields) {
       if (err) throw err;
       var respuesta = {
